@@ -2,7 +2,7 @@
 
 ## This script was used to allow the creation of the authorship page on the flagship paper
 
-This script was written in R and was based on the authorship list that can be found [here](https://docs.google.com/spreadsheets/d/1cp9pFeFUxXz5WMjRFv4X-AM1Hlc0iXYJa1rorSSj2Dc/edit#gid=0).
+This script was written in `R` and was based on the authorship list that can be found [here](https://docs.google.com/spreadsheets/d/1cp9pFeFUxXz5WMjRFv4X-AM1Hlc0iXYJa1rorSSj2Dc/edit#gid=0).
 
 Thanks to Amy Trankiem and Rachel Liao for curating the list, the main analysts on this are : [Kumar Veerapen](mailto:veerapen@broadinstitute.org) and Andrea Ganna.
 
