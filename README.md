@@ -12,6 +12,10 @@ Line by line in your terminal.
 
 **input file** : can be found in the `src/` dir in the spreadsheet format
 
+*to note*: 
+1) Author names must not have commas.
+2) Affiliations must be split by semicolons. 
+
 **script to run**: can be found in `script/authorshipListing.R`
 _main R package used_ : `officeR` (link found [here](https://davidgohel.github.io/officer/))
 
