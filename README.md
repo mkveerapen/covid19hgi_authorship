@@ -12,10 +12,14 @@ Line by line in your terminal.
 
 **input file** : can be found in the `src/` dir in the spreadsheet format
 
+*to note*: 
+1) Author names must not have commas.
+2) Multiple affiliations must be split by semicolons. 
+
 **script to run**: can be found in `script/authorshipListing.R`
 _main R package used_ : `officeR` (link found [here](https://davidgohel.github.io/officer/))
 
 Using said script, you will be able to obtain a file that looks like: 
-`covid19hgi_AuthorList_final.docx`
+`results/covid19hgi_AuthorList_final.docx`
 
-We then fused the lines using MS Word by finding and replacing `^p` with an empty space (` `). 
+We then fused the lines using MS Word by finding and replacing `^p` with an empty space (` `) which can be seen in `results/covid19hgi_AuthorList_final_KV.docx`
