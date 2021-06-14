@@ -20,6 +20,6 @@ Line by line in your terminal.
 _main R package used_ : `officeR` (link found [here](https://davidgohel.github.io/officer/))
 
 Using said script, you will be able to obtain a file that looks like: 
-`covid19hgi_AuthorList_final.docx`
+`results/covid19hgi_AuthorList_final.docx`
 
 We then fused the lines using MS Word by finding and replacing `^p` with an empty space (` `). 
