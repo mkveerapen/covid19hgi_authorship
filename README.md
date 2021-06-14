@@ -22,4 +22,4 @@ _main R package used_ : `officeR` (link found [here](https://davidgohel.github.i
 Using said script, you will be able to obtain a file that looks like: 
 `results/covid19hgi_AuthorList_final.docx`
 
-We then fused the lines using MS Word by finding and replacing `^p` with an empty space (` `). 
+We then fused the lines using MS Word by finding and replacing `^p` with an empty space (` `) which can be seen in `results/covid19hgi_AuthorList_final_KV.docx`
