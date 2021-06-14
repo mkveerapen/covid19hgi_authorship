@@ -14,7 +14,7 @@ Line by line in your terminal.
 
 *to note*: 
 1) Author names must not have commas.
-2) Affiliations must be split by semicolons. 
+2) Multiple affiliations must be split by semicolons. 
 
 **script to run**: can be found in `script/authorshipListing.R`
 _main R package used_ : `officeR` (link found [here](https://davidgohel.github.io/officer/))
