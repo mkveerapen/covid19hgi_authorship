@@ -22,7 +22,7 @@ library("xlsx")
 #[1] 3644
 
 author.list <- read.xlsx("/Users/andreaganna/Desktop/(Final) COVID-19 HGI Authorship and Studies .xlsx",sheetIndex=1)
-author.list <- author.list[,!grepl("NA",colnames(author.list))]
+author.list <- author.list[!is.na(author.list$Full.Name),!grepl("NA",colnames(author.list))]
 
 #number of unique authors
 length(unique(author.list$Full.Name))
@@ -56,17 +56,17 @@ author.list$Full.Name <- trimws(author.list$Full.Name)
 
 ## Sort the author list
 role_ordered <- ordered(author.list$Role,levels=
-                          c("Leadership","Writing group lead","Writing group member",
+                          c("Leadership","Writing group lead",
                             
-                            "Manuscript analyses team lead","Manuscript analyses team members: meta-analysis","Manuscript analyses team members: heritability, methods and supplements","Manuscript analyses team members: phewas","Manuscript analyses team members: mendelian randomization","Manuscript analyses team members: PC projection, gene prioritization","Manuscript analyses team members: gene prioritization","Manuscript analyses team members: sensitivity analysis","Manuscript analyses team members: PC projection","In-silico analysis team member",
+                            "Manuscript analyses team lead","Manuscript analyses team members: phewas","Manuscript analyses team members: mendelian randomization","Manuscript analyses team members: methods development","Manuscript analyses team members: PC projection, gene prioritization",
                             
-                            "Scientific communication lead","Scientific communication member","Website development","Translator",
+                            "Scientific communication lead","Website development",
                             
                             "Project management lead","Project managment support","Phenotype steering group","Data dictionary",
                             "Analysis Team Lead","Data Collection Lead","Admin Team Lead","Analysis Team Member","Data Collection Member","Admin Team Member"))
 
-main_groups <- c("Leadership","Writing group","Analysis group","Project management group","Scientific communication group")
-study_ordered <- ordered(author.list$Study,levels=c(main_groups,sort(unique(author.list$Study[!author.list$Study %in% main_groups]))))
+main_groups <- c("Leadership","Writing group","Analysis group","Project management group","Website development","Scientific communication group")
+study_ordered <- ordered(author.list$Study,levels=c(main_groups,sort(unique(author.list$Study[!author.list$Study %in% c(main_groups,"COVID-19 HGI corresponding authors")])),"COVID-19 HGI corresponding authors"))
 
 author.list.sorted <- author.list[order(study_ordered,role_ordered),]
 
@@ -111,7 +111,7 @@ affiliationProp <- fp_text(color="black", vertical.align="superscript")
 affiliationNameProp <- fp_text(color="black")
 commaSep <- ftext(",", nameProp)
   
-for (study in unique(author.list.sorted$Study)[-31])
+for (study in unique(author.list.sorted$Study))
 {
   # Select only the study of interest
   author.list.sorted.study <- author.list.sorted[author.list.sorted$Study==study,]
@@ -148,47 +148,6 @@ for (study in unique(author.list.sorted$Study)[-31])
 
 
 print(x, target = "/Users/andreaganna/Desktop/covid19hgi_AuthorList.docx")
-
-### genoOMMIC
-
-x2 <- read_docx()
-
-for (study in unique(author.list.sorted$Study)[31])
-{
-  # Select only the study of interest
-  author.list.sorted.study <- author.list.sorted[author.list.sorted$Study==study,]
-  
-  # Add Study name
-  studyName <- ftext(study, studyNameProp)
-  paragraph <- fpar(run_linebreak(), studyName)
-  x2 <- body_add_fpar(x2, paragraph)
-  
-  for (role in unique(author.list.sorted.study$Role))
-  {
-    author.list.sorted.study.role <- author.list.sorted.study[author.list.sorted.study$Role==role,]
-    
-    # Add role name
-    roleName <- ftext(role, roleProp)
-    paragraph <- fpar(run_linebreak(),roleName)
-    x2 <- body_add_fpar(x2, paragraph)
-    
-    for (i in 1:nrow(author.list.sorted.study.role))
-    {
-      Name <- ftext(as.character(author.list.sorted.study.role[i,]$Full.Name), nameProp)
-      
-      # Find all affiliations corresponding to the name
-      all_affiliation <- unlist(author.list.sorted.study.role$Affiliations.split[i])
-      affiliation_number <- paste(affiliations$number[affiliations$name %in% all_affiliation],collapse=",")
-      affiliationSuper <- ftext(affiliation_number, affiliationProp) 
-      
-      paragraph <- fpar(Name, affiliationSuper, fp_p = fp_par(keep_with_next = TRUE))
-      x2 <- body_add_fpar(x2, paragraph, pos="after")
-      x2 <- slip_in_text(x2, ",", pos = "after")
-    }
-  }
-}
-
-print(x2, target = "/Users/andreaganna/Desktop/covid19hgi_AuthorList_genoOMMIC.docx")
 
 
 ## Affiliations
